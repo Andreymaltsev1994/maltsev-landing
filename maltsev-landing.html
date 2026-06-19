@@ -176,7 +176,7 @@ section{padding:110px 0}
 .pain-footer{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:740px;background:var(--bg-dark);border-radius:6px;padding:22px 28px;border-left:2px solid var(--gold)}
 .pain-footer em{color:var(--text-light);font-style:normal;font-weight:700}
 
-@media(max-width:768px){.walls{grid-template-columns:1fr;gap:8px}.wcard,.wcard:first-child,.wcard:last-child{border-radius:6px;border-left:2px solid var(--blue)}.wcard:active,.wcard.tapped{border-left-color:var(--gold)!important;background:#131F30!important}.wcard:active .wtag,.wcard.tapped .wtag{color:var(--gold)}}
+@media(max-width:768px){.walls{grid-template-columns:1fr;gap:8px}.wcard,.wcard:first-child,.wcard:last-child{border-radius:6px;border-left:2px solid var(--blue)}.wcard:active,.wcard.tapped{border-left-color:var(--gold)!important;background:#131F30!important}.wcard:active .wtag,.wcard.tapped .wtag{color:var(--gold)}.case:active,.case.tapped{box-shadow:0 0 0 1px rgba(196,146,42,.5),0 8px 24px rgba(0,0,0,.3)!important;transform:translateY(-2px)}.copt:active,.copt.tapped{border-color:var(--gold)!important;background:#0C1A28!important}}
 
 /* =====================================================================
    SERVICES
@@ -334,7 +334,7 @@ section{padding:110px 0}
 .about-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start}
 .about-photo{width:280px;height:370px;background:var(--bg-card);border-radius:8px;border:1px solid var(--divider);position:relative;overflow:hidden;transition:box-shadow .4s}
 .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center -30px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-@media(max-width:768px){.about-photo img{object-position:center 15%}}
+@media(max-width:768px){.about-photo img{object-position:center 5%}}
 .about-photo:hover img{transform:scale(1.03)}
 .about-photo:hover{box-shadow:0 0 0 1px rgba(196,146,42,.2),0 24px 48px rgba(0,0,0,.3)}
 .about-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
@@ -463,7 +463,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .rtable th,.rtable td{padding:13px 16px}
 
   /* ABOUT */
-  .about-photo{height:320px}
+  .about-photo{height:400px}
   .about-stats{flex-wrap:wrap;gap:20px}
   .astat{padding:0 28px 0 0;min-width:90px}
   .astat:not(:last-child):hover{border-color:var(--divider)}
@@ -515,7 +515,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .calc-btn{font-size:10px;padding:16px}
 
   /* ABOUT */
-  .about-photo{height:280px}
+  .about-photo{height:360px}
   .astat-n{font-size:30px}
   .astat-l{font-size:9px}
   .about-stats{gap:16px}
@@ -1338,7 +1338,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .rtable th,.rtable td{padding:13px 16px}
 
   /* ABOUT */
-  .about-photo{height:320px}
+  .about-photo{height:400px}
   .about-stats{flex-wrap:wrap;gap:20px}
   .astat{padding:0 28px 0 0;min-width:90px}
   .astat:not(:last-child):hover{border-color:var(--divider)}
@@ -1390,7 +1390,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .calc-btn{font-size:10px;padding:16px}
 
   /* ABOUT */
-  .about-photo{height:280px}
+  .about-photo{height:360px}
   .astat-n{font-size:30px}
   .astat-l{font-size:9px}
   .about-stats{gap:16px}
@@ -1507,7 +1507,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .rtable th,.rtable td{padding:13px 16px}
 
   /* ABOUT */
-  .about-photo{height:320px}
+  .about-photo{height:400px}
   .about-stats{flex-wrap:wrap;gap:20px}
   .astat{padding:0 28px 0 0;min-width:90px}
   .astat:not(:last-child):hover{border-color:var(--divider)}
@@ -1559,7 +1559,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
   .calc-btn{font-size:10px;padding:16px}
 
   /* ABOUT */
-  .about-photo{height:280px}
+  .about-photo{height:360px}
   .astat-n{font-size:30px}
   .astat-l{font-size:9px}
   .about-stats{gap:16px}
@@ -1767,17 +1767,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-/* Mobile touch highlight for wall cards */
+/* Mobile touch highlight for interactive cards */
 (function(){
   if(!('ontouchstart' in window)) return;
-  document.querySelectorAll('.wcard').forEach(function(card){
-    card.addEventListener('touchstart', function(){
-      card.classList.add('tapped');
-    }, {passive:true});
-    card.addEventListener('touchend', function(){
-      setTimeout(function(){ card.classList.remove('tapped'); }, 600);
-    }, {passive:true});
-  });
+  function addTap(sel, dur){
+    document.querySelectorAll(sel).forEach(function(el){
+      el.addEventListener('touchstart', function(){ el.classList.add('tapped'); }, {passive:true});
+      el.addEventListener('touchend', function(){ setTimeout(function(){ el.classList.remove('tapped'); }, dur||600); }, {passive:true});
+    });
+  }
+  addTap('.wcard', 600);
+  addTap('.case', 500);
+  addTap('.copt', 400);
 })();
 </script>
 
@@ -1795,17 +1796,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 })();
 
-/* Mobile touch highlight for wall cards */
+/* Mobile touch highlight for interactive cards */
 (function(){
   if(!('ontouchstart' in window)) return;
-  document.querySelectorAll('.wcard').forEach(function(card){
-    card.addEventListener('touchstart', function(){
-      card.classList.add('tapped');
-    }, {passive:true});
-    card.addEventListener('touchend', function(){
-      setTimeout(function(){ card.classList.remove('tapped'); }, 600);
-    }, {passive:true});
-  });
+  function addTap(sel, dur){
+    document.querySelectorAll(sel).forEach(function(el){
+      el.addEventListener('touchstart', function(){ el.classList.add('tapped'); }, {passive:true});
+      el.addEventListener('touchend', function(){ setTimeout(function(){ el.classList.remove('tapped'); }, dur||600); }, {passive:true});
+    });
+  }
+  addTap('.wcard', 600);
+  addTap('.case', 500);
+  addTap('.copt', 400);
 })();
 
 /* ── ЗАГРУЗОЧНЫЙ ЭКРАН ── */
