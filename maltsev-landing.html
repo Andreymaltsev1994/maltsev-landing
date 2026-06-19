@@ -334,7 +334,7 @@ section{padding:110px 0}
 .about-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:start}
 .about-photo{width:280px;height:370px;background:var(--bg-card);border-radius:8px;border:1px solid var(--divider);position:relative;overflow:hidden;transition:box-shadow .4s}
 .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center -30px;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-@media(max-width:768px){.about-photo img{object-position:center top}}
+@media(max-width:768px){.about-photo img{object-position:center 15%}}
 .about-photo:hover img{transform:scale(1.03)}
 .about-photo:hover{box-shadow:0 0 0 1px rgba(196,146,42,.2),0 24px 48px rgba(0,0,0,.3)}
 .about-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
@@ -544,12 +544,7 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
 <!-- ЗАГРУЗОЧНЫЙ ЭКРАН -->
 <div id="page-loader" aria-hidden="true">
   <div class="loader-logo" id="loaderLogo">
-    <svg width="72" height="63" viewBox="0 0 544 473" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- M shape - dark navy -->
-      <path d="M60 420V80L200 280L272 140L344 280L484 80V420" stroke="#1A3A5C" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <!-- $ sign - gold -->
-      <text x="196" y="320" font-family="Georgia,serif" font-size="220" font-weight="700" fill="#C4922A">$</text>
-    </svg>
+    <img id="loaderLogoImg" src="" alt="Логотип" style="height:80px;width:auto;display:block">
   </div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:12px;width:min(320px,80vw)">
     <div class="loader-title" id="loaderTitle">Андрей Мальцев</div>
@@ -1822,6 +1817,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   var logo   = document.getElementById('loaderLogo');
   var title  = document.getElementById('loaderTitle');
   if(!loader) return;
+  // Копируем логотип из навбара
+  var navImg = document.querySelector('.nav-logo img');
+  if(navImg && logo){ var li=document.getElementById('loaderLogoImg'); if(li) li.src=navImg.src; }
 
   var phases = [
     {at:0,   label:'Инициализация'},
