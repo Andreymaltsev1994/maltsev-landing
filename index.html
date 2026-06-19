@@ -412,6 +412,114 @@ section{padding:110px 0}
    ===================================================================== */
 footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relative;z-index:1}
 .footer-inner{max-width:1160px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;font-family:var(--body);font-size:9px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:rgba(196,146,42,.55);flex-wrap:wrap;gap:8px}
+
+/* =====================================================================
+   MOBILE ADAPTATION — полная адаптация
+   ===================================================================== */
+
+/* --- 768px и меньше --- */
+@media(max-width:768px){
+
+  /* Базовые отступы */
+  section{padding:72px 0}
+  .container,.nav-inner,.footer-inner{padding:0 20px}
+
+  /* NAV */
+  .nav{padding:12px 0}
+  .nav-cta{padding:9px 18px;font-size:9px}
+
+  /* HERO — дополнение к существующим стилям */
+  #hero{padding-top:100px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn-gold,.hero-actions .btn-ghost{width:100%;justify-content:center;text-align:center}
+  .hstat:not(:last-child):hover{border-color:var(--divider)}
+
+  /* PAIN */
+  .pain-hook{margin-bottom:36px}
+  .pain-footer{padding:18px 20px}
+
+  /* SERVICES */
+  .svc-intro{margin-bottom:48px}
+  .svc{margin-bottom:60px}
+
+  /* PROCESS */
+  .process-quote{font-size:clamp(18px,5vw,26px);padding-left:18px}
+  .how-warning{padding:18px 20px;margin-bottom:36px}
+
+  /* BUNDLE */
+  .bundle-text{font-size:14px;margin-bottom:28px}
+  .bundle-note{padding:14px 18px}
+
+  /* CALCULATOR */
+  .calc-wrap{max-width:100%}
+  .copt{padding:16px 18px;gap:14px}
+  .cr-total{font-size:40px}
+
+  /* RESULTS */
+  .rtable th,.rtable td{padding:13px 16px}
+
+  /* ABOUT */
+  .about-photo{height:320px}
+  .about-stats{flex-wrap:wrap;gap:20px}
+  .astat{padding:0 28px 0 0;min-width:90px}
+  .astat:not(:last-child):hover{border-color:var(--divider)}
+  .about-sig:hover{border-color:var(--divider)}
+
+  /* FOOTER */
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:14px;padding:24px 20px}
+
+  /* Типографика */
+  .grule{margin-bottom:40px}
+  .stitle{font-size:clamp(28px,7vw,42px)}
+}
+
+/* --- 480px и меньше --- */
+@media(max-width:480px){
+
+  section{padding:56px 0}
+  .container,.nav-inner,.footer-inner{padding:0 16px}
+
+  /* NAV */
+  .nav-logo img{height:48px!important}
+
+  /* HERO */
+  #hero{padding-top:90px}
+  .hero-title{font-size:clamp(30px,9vw,42px)!important}
+  .hero-lead{font-size:15px}
+  .hero-stats{margin-top:40px;padding-top:32px}
+  .hstat{padding:14px 16px}
+  .hstat-n{font-size:34px}
+
+  /* PAIN */
+  .pain-headline{font-size:clamp(17px,5.5vw,22px)}
+  .wcard{padding:24px 20px 20px}
+
+  /* SERVICES */
+  .svc-title{font-size:clamp(24px,7vw,34px)!important}
+  .svc-desc{font-size:13px}
+  .svc-price{font-size:26px}
+  .svc-meta{flex-direction:column;align-items:flex-start;gap:8px}
+
+  /* PROCESS */
+  .hstep{gap:16px;padding:20px 0}
+
+  /* CALCULATOR */
+  .calc-opts{gap:8px}
+  .copt-name{font-size:12px}
+  .copt-price{font-size:18px}
+  .cr-total{font-size:34px}
+  .calc-btn{font-size:10px;padding:16px}
+
+  /* ABOUT */
+  .about-photo{height:280px}
+  .astat-n{font-size:30px}
+  .astat-l{font-size:9px}
+  .about-stats{gap:16px}
+
+  /* КНОПКИ */
+  .btn-gold{padding:14px 24px;font-size:10px}
+  .nav-cta{display:none}
+}
 </style>
 </head>
 <body>
@@ -1146,7 +1254,115 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
 </footer>
 
 <!-- SR ONLY -->
-<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}</style>
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+/* =====================================================================
+   MOBILE ADAPTATION — полная адаптация
+   ===================================================================== */
+
+/* --- 768px и меньше --- */
+@media(max-width:768px){
+
+  /* Базовые отступы */
+  section{padding:72px 0}
+  .container,.nav-inner,.footer-inner{padding:0 20px}
+
+  /* NAV */
+  .nav{padding:12px 0}
+  .nav-cta{padding:9px 18px;font-size:9px}
+
+  /* HERO — дополнение к существующим стилям */
+  #hero{padding-top:100px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn-gold,.hero-actions .btn-ghost{width:100%;justify-content:center;text-align:center}
+  .hstat:not(:last-child):hover{border-color:var(--divider)}
+
+  /* PAIN */
+  .pain-hook{margin-bottom:36px}
+  .pain-footer{padding:18px 20px}
+
+  /* SERVICES */
+  .svc-intro{margin-bottom:48px}
+  .svc{margin-bottom:60px}
+
+  /* PROCESS */
+  .process-quote{font-size:clamp(18px,5vw,26px);padding-left:18px}
+  .how-warning{padding:18px 20px;margin-bottom:36px}
+
+  /* BUNDLE */
+  .bundle-text{font-size:14px;margin-bottom:28px}
+  .bundle-note{padding:14px 18px}
+
+  /* CALCULATOR */
+  .calc-wrap{max-width:100%}
+  .copt{padding:16px 18px;gap:14px}
+  .cr-total{font-size:40px}
+
+  /* RESULTS */
+  .rtable th,.rtable td{padding:13px 16px}
+
+  /* ABOUT */
+  .about-photo{height:320px}
+  .about-stats{flex-wrap:wrap;gap:20px}
+  .astat{padding:0 28px 0 0;min-width:90px}
+  .astat:not(:last-child):hover{border-color:var(--divider)}
+  .about-sig:hover{border-color:var(--divider)}
+
+  /* FOOTER */
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:14px;padding:24px 20px}
+
+  /* Типографика */
+  .grule{margin-bottom:40px}
+  .stitle{font-size:clamp(28px,7vw,42px)}
+}
+
+/* --- 480px и меньше --- */
+@media(max-width:480px){
+
+  section{padding:56px 0}
+  .container,.nav-inner,.footer-inner{padding:0 16px}
+
+  /* NAV */
+  .nav-logo img{height:48px!important}
+
+  /* HERO */
+  #hero{padding-top:90px}
+  .hero-title{font-size:clamp(30px,9vw,42px)!important}
+  .hero-lead{font-size:15px}
+  .hero-stats{margin-top:40px;padding-top:32px}
+  .hstat{padding:14px 16px}
+  .hstat-n{font-size:34px}
+
+  /* PAIN */
+  .pain-headline{font-size:clamp(17px,5.5vw,22px)}
+  .wcard{padding:24px 20px 20px}
+
+  /* SERVICES */
+  .svc-title{font-size:clamp(24px,7vw,34px)!important}
+  .svc-desc{font-size:13px}
+  .svc-price{font-size:26px}
+  .svc-meta{flex-direction:column;align-items:flex-start;gap:8px}
+
+  /* PROCESS */
+  .hstep{gap:16px;padding:20px 0}
+
+  /* CALCULATOR */
+  .calc-opts{gap:8px}
+  .copt-name{font-size:12px}
+  .copt-price{font-size:18px}
+  .cr-total{font-size:34px}
+  .calc-btn{font-size:10px;padding:16px}
+
+  /* ABOUT */
+  .about-photo{height:280px}
+  .astat-n{font-size:30px}
+  .astat-l{font-size:9px}
+  .about-stats{gap:16px}
+
+  /* КНОПКИ */
+  .btn-gold{padding:14px 24px;font-size:10px}
+  .nav-cta{display:none}
+}
+</style>
 
 <!-- SCROLL CARD STYLES -->
 <style>
@@ -1204,6 +1420,114 @@ footer{border-top:0.5px solid rgba(196,146,42,.35);padding:22px 0;position:relat
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .sc-post-meta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;flex-shrink:0}
 .sc-meta-item{font-size:9px;color:rgba(255,255,255,.18);letter-spacing:.5px;display:flex;align-items:center;gap:4px;font-family:var(--body)}
+
+/* =====================================================================
+   MOBILE ADAPTATION — полная адаптация
+   ===================================================================== */
+
+/* --- 768px и меньше --- */
+@media(max-width:768px){
+
+  /* Базовые отступы */
+  section{padding:72px 0}
+  .container,.nav-inner,.footer-inner{padding:0 20px}
+
+  /* NAV */
+  .nav{padding:12px 0}
+  .nav-cta{padding:9px 18px;font-size:9px}
+
+  /* HERO — дополнение к существующим стилям */
+  #hero{padding-top:100px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn-gold,.hero-actions .btn-ghost{width:100%;justify-content:center;text-align:center}
+  .hstat:not(:last-child):hover{border-color:var(--divider)}
+
+  /* PAIN */
+  .pain-hook{margin-bottom:36px}
+  .pain-footer{padding:18px 20px}
+
+  /* SERVICES */
+  .svc-intro{margin-bottom:48px}
+  .svc{margin-bottom:60px}
+
+  /* PROCESS */
+  .process-quote{font-size:clamp(18px,5vw,26px);padding-left:18px}
+  .how-warning{padding:18px 20px;margin-bottom:36px}
+
+  /* BUNDLE */
+  .bundle-text{font-size:14px;margin-bottom:28px}
+  .bundle-note{padding:14px 18px}
+
+  /* CALCULATOR */
+  .calc-wrap{max-width:100%}
+  .copt{padding:16px 18px;gap:14px}
+  .cr-total{font-size:40px}
+
+  /* RESULTS */
+  .rtable th,.rtable td{padding:13px 16px}
+
+  /* ABOUT */
+  .about-photo{height:320px}
+  .about-stats{flex-wrap:wrap;gap:20px}
+  .astat{padding:0 28px 0 0;min-width:90px}
+  .astat:not(:last-child):hover{border-color:var(--divider)}
+  .about-sig:hover{border-color:var(--divider)}
+
+  /* FOOTER */
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:14px;padding:24px 20px}
+
+  /* Типографика */
+  .grule{margin-bottom:40px}
+  .stitle{font-size:clamp(28px,7vw,42px)}
+}
+
+/* --- 480px и меньше --- */
+@media(max-width:480px){
+
+  section{padding:56px 0}
+  .container,.nav-inner,.footer-inner{padding:0 16px}
+
+  /* NAV */
+  .nav-logo img{height:48px!important}
+
+  /* HERO */
+  #hero{padding-top:90px}
+  .hero-title{font-size:clamp(30px,9vw,42px)!important}
+  .hero-lead{font-size:15px}
+  .hero-stats{margin-top:40px;padding-top:32px}
+  .hstat{padding:14px 16px}
+  .hstat-n{font-size:34px}
+
+  /* PAIN */
+  .pain-headline{font-size:clamp(17px,5.5vw,22px)}
+  .wcard{padding:24px 20px 20px}
+
+  /* SERVICES */
+  .svc-title{font-size:clamp(24px,7vw,34px)!important}
+  .svc-desc{font-size:13px}
+  .svc-price{font-size:26px}
+  .svc-meta{flex-direction:column;align-items:flex-start;gap:8px}
+
+  /* PROCESS */
+  .hstep{gap:16px;padding:20px 0}
+
+  /* CALCULATOR */
+  .calc-opts{gap:8px}
+  .copt-name{font-size:12px}
+  .copt-price{font-size:18px}
+  .cr-total{font-size:34px}
+  .calc-btn{font-size:10px;padding:16px}
+
+  /* ABOUT */
+  .about-photo{height:280px}
+  .astat-n{font-size:30px}
+  .astat-l{font-size:9px}
+  .about-stats{gap:16px}
+
+  /* КНОПКИ */
+  .btn-gold{padding:14px 24px;font-size:10px}
+  .nav-cta{display:none}
+}
 </style>
 
 <script>
