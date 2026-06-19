@@ -176,7 +176,7 @@ section{padding:110px 0}
 .pain-footer{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:740px;background:var(--bg-dark);border-radius:6px;padding:22px 28px;border-left:2px solid var(--gold)}
 .pain-footer em{color:var(--text-light);font-style:normal;font-weight:700}
 
-@media(max-width:768px){.walls{grid-template-columns:1fr;gap:8px}.wcard,.wcard:first-child,.wcard:last-child{border-radius:6px;border-left:2px solid var(--blue)}.wcard:last-child{border-left-color:var(--gold)}}
+@media(max-width:768px){.walls{grid-template-columns:1fr;gap:8px}.wcard,.wcard:first-child,.wcard:last-child{border-radius:6px;border-left:2px solid var(--blue)}.wcard:active,.wcard.tapped{border-left-color:var(--gold)!important;background:#131F30!important}.wcard:active .wtag,.wcard.tapped .wtag{color:var(--gold)}}
 
 /* =====================================================================
    SERVICES
@@ -1735,6 +1735,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if(t){ e.preventDefault(); window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 84, behavior:'smooth'}); }
   });
 });
+
+/* Mobile touch highlight for wall cards */
+(function(){
+  if(!('ontouchstart' in window)) return;
+  document.querySelectorAll('.wcard').forEach(function(card){
+    card.addEventListener('touchstart', function(){
+      card.classList.add('tapped');
+    }, {passive:true});
+    card.addEventListener('touchend', function(){
+      setTimeout(function(){ card.classList.remove('tapped'); }, 600);
+    }, {passive:true});
+  });
+})();
 </script>
 
 <script>
@@ -1748,6 +1761,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       el.style.boxShadow='0 0 18px rgba('+GOLD+',.18)';
     });
     el.addEventListener('mouseleave',()=>{ el.style.boxShadow=''; });
+  });
+})();
+
+/* Mobile touch highlight for wall cards */
+(function(){
+  if(!('ontouchstart' in window)) return;
+  document.querySelectorAll('.wcard').forEach(function(card){
+    card.addEventListener('touchstart', function(){
+      card.classList.add('tapped');
+    }, {passive:true});
+    card.addEventListener('touchend', function(){
+      setTimeout(function(){ card.classList.remove('tapped'); }, 600);
+    }, {passive:true});
   });
 })();
 </script>
