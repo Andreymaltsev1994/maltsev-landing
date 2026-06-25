@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PDR Master Краснодар — Удаление вмятин без покраски</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --acc:#FF7A00;--bg:#0C0D0F;--s1:#13161B;--s2:#1A1D24;
+  --br:#222730;--tx:#F0F2F5;--mu:#7B8494;
+  --fd:'Playfair Display',Georgia,serif;
+  --fb:'Manrope',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:16px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(12,13,15,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--br);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 60px;height:64px;
+}
+.logo{font-family:var(--fb);font-weight:700;font-size:20px;letter-spacing:-.02em}
+.logo span{color:var(--acc)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--mu);transition:color .2s}
+.nav-links a:hover{color:var(--tx)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.phone{font-size:14px;font-weight:600}
+.btn-nav{background:transparent;border:1px solid rgba(240,242,245,.22);color:var(--tx);padding:9px 22px;border-radius:6px;font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;transition:border-color .2s}
+.btn-nav:hover{border-color:rgba(240,242,245,.5)}
+
+/* ── HERO SCROLL WRAPPER ── */
+#hero-scroll{position:relative;height:calc(1200px + 100vh)}
+.hero-sticky{
+  position:sticky;top:0;height:100vh;overflow:hidden;
+  display:grid;grid-template-columns:1fr 440px;
+}
+.hero-photo{
+  position:absolute;inset:0;
+  background:url('photo.jpg') center/170% no-repeat;
+  will-change:clip-path,background-size;
+  clip-path:polygon(25% 25%, 75% 25%, 75% 75%, 25% 75%);
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(105deg,rgba(10,12,15,.88) 0%,rgba(10,12,15,.65) 48%,rgba(10,12,15,.18) 100%);
+}
+.hero-left{position:relative;z-index:2;padding:80px 0 80px 60px;display:flex;align-items:center}
+.hero-inner{max-width:540px}
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.eyebrow-line{width:40px;height:2px;background:var(--acc);flex-shrink:0}
+.eyebrow-text{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+h1{font-family:var(--fd);font-weight:800;font-size:62px;line-height:1.07;color:var(--tx);margin-bottom:0}
+h1 em{display:block;font-style:italic;color:var(--acc)}
+.hero-desc{font-size:15px;line-height:1.75;color:rgba(240,242,245,.72);margin:26px 0 30px;max-width:460px}
+.hero-bullets{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:38px}
+.hero-bullets li{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:rgba(240,242,245,.87)}
+.bul-dot{width:6px;height:6px;min-width:6px;border-radius:50%;background:var(--acc)}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-dark{background:var(--s2);color:var(--tx);border:1px solid var(--br);padding:14px 28px;border-radius:7px;font-family:var(--fb);font-size:14px;font-weight:700;cursor:pointer;transition:background .2s,border-color .2s}
+.btn-dark:hover{background:var(--s1);border-color:rgba(240,242,245,.3)}
+.btn-wa{display:flex;align-items:center;gap:9px;background:transparent;color:var(--tx);border:1px solid rgba(240,242,245,.18);padding:14px 28px;border-radius:7px;font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;transition:border-color .2s}
+.btn-wa:hover{border-color:rgba(240,242,245,.4)}
+.wa-ico{width:18px;height:18px;fill:#25D366;flex-shrink:0}
+
+/* FORM CARD */
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;padding:60px 60px 60px 20px}
+.form-card{background:var(--s1);border:1px solid var(--br);border-top:3px solid var(--acc);border-radius:12px;padding:34px 30px;width:100%}
+.form-card h2{font-family:var(--fd);font-weight:700;font-size:23px;margin-bottom:4px}
+.form-sub{font-size:13px;color:var(--acc);margin-bottom:28px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
+.fg input{width:100%;background:var(--s2);border:1px solid var(--br);border-radius:6px;padding:12px 14px;font-family:var(--fb);font-size:14px;color:var(--tx);outline:none;transition:border-color .2s}
+.fg input:focus{border-color:rgba(255,122,0,.45)}
+.upload-zone{border:1px dashed var(--br);border-radius:6px;padding:22px;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--s2)}
+.upload-zone:hover{border-color:var(--acc)}
+.upload-zone svg{width:24px;height:24px;stroke:var(--mu);fill:none;stroke-width:1.5;margin:0 auto 8px}
+.upload-zone p{font-size:13px;color:var(--mu)}
+.upload-zone a{color:var(--acc);font-weight:600}
+.btn-submit{width:100%;background:var(--tx);color:var(--bg);border:none;padding:15px;border-radius:7px;font-family:var(--fb);font-size:14px;font-weight:700;cursor:pointer;margin-top:14px;transition:opacity .2s}
+.btn-submit:hover{opacity:.9}
+.form-note{font-size:11px;color:var(--mu);text-align:center;margin-top:10px}
+.form-note a{color:var(--acc)}
+
+/* STATS MARQUEE */
+.stats{background:var(--s1);border-top:1px solid var(--br);border-bottom:1px solid var(--br);overflow:hidden;position:relative}
+.stats-track{display:flex;width:max-content;animation:stats-scroll 18s linear infinite}
+.stats-track:hover{animation-play-state:paused}
+@keyframes stats-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.stat{padding:28px 56px;display:flex;align-items:center;gap:20px;white-space:nowrap;flex-shrink:0}
+.stat-num{font-family:var(--fd);font-size:42px;font-weight:800;color:var(--acc);line-height:1}
+.stat-label{font-size:13px;color:var(--mu)}
+.stat-sep{display:none}
+
+/* SECTION BASE */
+.section{padding:96px 60px}
+.sec-label{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.sec-line{width:40px;height:2px;background:var(--acc);flex-shrink:0}
+.sec-tag{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.section h2{font-family:var(--fd);font-weight:800;font-size:42px;line-height:1.14;margin-bottom:12px}
+.sec-sub{font-size:15px;color:var(--mu);max-width:520px;line-height:1.7;margin-bottom:52px}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br);border:1px solid var(--br);border-radius:12px;overflow:hidden}
+.svc{background:var(--s1);padding:38px 34px;position:relative;transition:background .2s}
+.svc:hover{background:var(--s2)}
+.svc-num{font-family:var(--fd);font-size:52px;font-weight:800;color:rgba(255,122,0,.06);position:absolute;top:20px;right:24px;line-height:1;user-select:none;transition:color .35s ease}
+.svc:hover .svc-num,.svc.touch-active .svc-num{color:rgba(255,122,0,.55)}
+.svc-ico{width:50px;height:50px;background:rgba(255,122,0,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.svc-ico svg{width:22px;height:22px;stroke:var(--acc);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{font-family:var(--fd);font-size:19px;font-weight:700;margin-bottom:10px}
+.svc p{font-size:14px;color:var(--mu);line-height:1.68}
+.svc-price{display:inline-block;margin-top:18px;font-size:13px;font-weight:700;color:var(--acc);background:rgba(255,122,0,.08);padding:5px 14px;border-radius:20px}
+
+/* TECHNOLOGY */
+.tech-bg{background:var(--s1)}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.steps{display:flex;flex-direction:column}
+.step{display:flex;gap:22px;position:relative;padding-bottom:36px}
+.step:last-child{padding-bottom:0}
+.step-connector{position:absolute;left:19px;top:42px;bottom:0;width:1px;background:var(--br)}
+.step:last-child .step-connector{display:none}
+.step-num{width:40px;height:40px;min-width:40px;border-radius:50%;background:var(--s2);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--mu);position:relative;z-index:1;flex-shrink:0;margin-top:4px;transition:background .35s ease,border-color .35s ease,color .35s ease,transform .35s ease}
+.step.active .step-num{background:var(--acc);border-color:var(--acc);color:#fff;transform:scale(1.12)}
+.step h4{font-family:var(--fd);font-size:17px;font-weight:700;margin-bottom:7px;margin-top:6px}
+.step p{font-size:14px;color:var(--mu);line-height:1.68}
+.tech-photo{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3}
+.tech-slide{
+  position:absolute;inset:0;
+  background:var(--s2);border:1px solid var(--br);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  opacity:0;transition:opacity .45s ease;
+  overflow:hidden;
+}
+.tech-slide.active{opacity:1}
+.tech-slide img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.tech-slide-label{position:relative;z-index:1;text-align:center;pointer-events:none}
+.tech-slide-label svg{width:56px;height:56px;stroke:var(--br);fill:none;stroke-width:1;margin:0 auto 12px;display:block}
+.tech-slide-label p{font-size:13px;color:var(--mu)}
+.tech-slide-label span{color:var(--acc);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:4px}
+
+/* GALLERY CARD STACK */
+.card-stack-wrap{user-select:none;-webkit-user-select:none}
+.card-stage{
+  position:relative;height:460px;
+  display:flex;align-items:flex-end;justify-content:center;
+  perspective:1100px;overflow:visible;
+  touch-action:pan-y pinch-zoom;
+}
+.g-card{
+  position:absolute;bottom:0;
+  border-radius:16px;overflow:hidden;
+  border:2px solid rgba(255,255,255,.07);
+  will-change:transform,opacity;
+  cursor:pointer;
+  transition:transform .48s cubic-bezier(.34,1.4,.64,1),
+             opacity .3s ease,border-color .3s ease;
+  transform-style:preserve-3d;
+  transform-origin:center bottom;
+}
+.g-card.is-active{cursor:grab;border-color:rgba(255,122,0,.45)}
+.g-card.is-active:active{cursor:grabbing}
+.g-card-bg{
+  position:absolute;inset:0;
+  background:var(--s2);
+  display:flex;align-items:center;justify-content:center;
+}
+.g-card-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;display:block;transition:opacity .5s ease}
+.g-img-after{opacity:0}
+.g-card:hover .g-img-after,.g-card.touch-after .g-img-after{opacity:1}
+.g-card:hover .g-img-before,.g-card.touch-after .g-img-before{opacity:0}
+.g-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 55%);pointer-events:none}
+.g-card-badges{position:absolute;top:14px;left:0;right:0;display:flex;justify-content:space-between;padding:0 14px}
+.g-badge-b,.g-badge-a{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:4px}
+.g-badge-b{background:rgba(255,75,75,.22);color:#ff6b6b}
+.g-badge-a{background:rgba(39,174,96,.22);color:#2ecc71}
+.g-card-footer{position:absolute;bottom:0;left:0;right:0;padding:18px 20px;display:flex;justify-content:space-between;align-items:flex-end}
+.g-card-title{font-size:15px;font-weight:700;color:#fff}
+.g-card-sub{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.g-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;color:var(--mu);font-size:13px;position:relative;z-index:1}
+.g-ph svg{width:60px;height:36px;stroke:var(--br);fill:none;stroke-width:1.5;display:block}
+/* Dots */
+.card-dots{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:32px}
+.card-dot{width:8px;height:8px;border-radius:50%;background:var(--br);border:none;padding:0;cursor:pointer;transition:background .25s,transform .25s ease}
+.card-dot.active{background:var(--acc);transform:scale(1.35)}
+
+/* REVIEWS */
+.rev-bg{background:var(--s1)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.rev{background:var(--s2);border:1px solid var(--br);border-radius:12px;padding:30px 26px;transition:border-color .35s ease,box-shadow .35s ease}
+.rev:hover,.rev.touch-active{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 8px 32px rgba(255,122,0,.15)}
+.rev-stars{color:var(--acc);font-size:16px;letter-spacing:2px;margin-bottom:16px}
+.rev-text{font-size:14px;line-height:1.72;color:rgba(240,242,245,.8);margin-bottom:22px}
+.rev-author{display:flex;align-items:center;gap:12px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--s1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--acc);flex-shrink:0}
+.author-name{font-size:14px;font-weight:600}
+.author-car{font-size:12px;color:var(--mu);margin-top:2px}
+
+/* CTA */
+.cta-section{background:var(--bg);border-top:1px solid var(--br);padding:96px 60px;display:grid;grid-template-columns:1fr 420px;gap:70px;align-items:center}
+.cta-left h2{font-family:var(--fd);font-size:44px;font-weight:800;margin-bottom:16px;line-height:1.12}
+.cta-left p{font-size:15px;color:var(--mu);line-height:1.75;max-width:460px;margin-bottom:32px}
+.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.contact-card{background:var(--s1);border:1px solid var(--br);border-radius:8px;padding:18px;display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;cursor:pointer;transition:border-color .3s ease,box-shadow .3s ease}
+.contact-card:hover{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 6px 24px rgba(255,122,0,.15)}
+.cc-ico{width:40px;height:40px;min-width:40px;border-radius:8px;background:rgba(255,122,0,.08);display:flex;align-items:center;justify-content:center}
+.cc-ico svg{width:20px;height:20px;stroke:var(--acc);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cc-val{font-size:14px;font-weight:700}
+.cc-sub{font-size:12px;color:var(--mu);margin-top:2px}
+
+/* FOOTER */
+footer{background:var(--s1);border-top:1px solid var(--br);padding:36px 60px;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:var(--fb);font-weight:700;font-size:16px}
+.footer-logo span{color:var(--acc)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{font-size:13px;color:var(--mu);transition:color .2s}
+.footer-links a:hover{color:var(--tx)}
+.footer-copy{font-size:12px;color:var(--mu)}
+
+/* FLOATING WA */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;
+  width:58px;height:58px;background:#25D366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,.4);cursor:pointer;z-index:200;
+  transition:transform .2s,box-shadow .2s;
+}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 30px rgba(37,211,102,.5)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+
+/* ── RESPONSIVE ── */
+
+/* ПЛАНШЕТ */
+@media(max-width:1024px){
+  /* Hero: 1 колонка, форма под контентом */
+  .hero-sticky{grid-template-columns:1fr;grid-template-rows:1fr auto}
+  .hero-left{padding:80px 40px 40px}
+  .hero-right{padding:0 40px 60px;justify-content:center}
+  .form-card{max-width:500px}
+
+  /* Tech */
+  .tech-grid{grid-template-columns:1fr;gap:32px}
+  .tech-photo{display:flex;aspect-ratio:16/9}
+
+  /* CTA */
+  .cta-section{grid-template-columns:1fr}
+}
+
+/* МОБИЛЬНЫЙ */
+@media(max-width:768px){
+  /* NAV */
+  .nav{padding:0 16px}
+  .nav-links{display:none}
+  .phone{display:none} /* убираем номер — есть в контактах */
+
+  /* HERO */
+  .hero-sticky{grid-template-columns:1fr;grid-template-rows:1fr}
+  .hero-left{padding:72px 20px 40px}
+  .hero-right{display:none}
+  h1{font-size:36px}
+
+  /* SECTIONS */
+  .section{padding:52px 20px}
+  .section h2{font-size:28px}
+  .sec-sub{font-size:14px;margin-bottom:32px}
+
+  /* SERVICES */
+  .svc-grid{grid-template-columns:1fr}
+  .svc{padding:28px 24px}
+
+  /* STATS */
+  .stat{padding:22px 32px}
+  .stat-num{font-size:32px}
+
+  /* TECH */
+  .tech-grid{gap:24px}
+  .tech-photo{aspect-ratio:4/3;min-height:200px}
+  .step h4{font-size:15px}
+
+  /* GALLERY */
+  .card-stage{height:280px}
+  .card-dots{margin-top:20px}
+
+  /* REVIEWS */
+  .rev-grid{grid-template-columns:1fr}
+  .rev{padding:24px 20px}
+
+  /* CTA */
+  .cta-section{padding:52px 20px;gap:32px}
+  .contact-cards{grid-template-columns:1fr} /* карточки в 1 столбец */
+  .cta-left h2{font-size:32px}
+
+  /* FOOTER */
+  footer{flex-direction:column;gap:16px;text-align:center;padding:24px 20px}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:16px}
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ (375px и ниже) */
+@media(max-width:400px){
+  h1{font-size:30px}
+  .section h2{font-size:26px}
+  .hero-btns{flex-direction:column}
+  .btn-dark,.btn-wa{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ── НАВИГАЦИЯ ── -->
+<nav class="nav">
+  <div class="logo">PDR<span>Master</span></div>
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#technology">Технология</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contacts">Контакты</a>
+  </div>
+  <div class="nav-right">
+    <span class="phone">+7 861 000-00-00</span>
+    <button class="btn-nav" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Рассчитать</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div id="hero-scroll">
+<section class="hero-sticky">
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-left">
+    <div class="hero-inner">
+      <div class="eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">PDR · Краснодар</span>
+      </div>
+      <h1>Удаление вмятин<em>без покраски</em></h1>
+      <p class="hero-desc">Вернём заводской вид вашему автомобилю за 1 день. Технология PDR сохраняет оригинальное лакокрасочное покрытие без разбора кузова.</p>
+      <ul class="hero-bullets">
+        <li><span class="bul-dot"></span>Без покраски и шпаклёвки</li>
+        <li><span class="bul-dot"></span>Сохранение заводского ЛКП</li>
+        <li><span class="bul-dot"></span>От 30 минут — гарантия результата</li>
+      </ul>
+      <div class="hero-btns">
+        <button class="btn-dark" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Рассчитать стоимость</button>
+        <button class="btn-wa">
+          <svg class="wa-ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.857L.057 23.882l6.168-1.618A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.77-.5-5.364-1.373l-.385-.22-3.663.961.977-3.565-.245-.378A9.937 9.937 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+          Написать в WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="form-card">
+      <h2>Получить расчёт</h2>
+      <p class="form-sub">Ответим в течение 15 минут</p>
+      <div class="fg">
+        <label>Ваше имя</label>
+        <input type="text" placeholder="Александр"/>
+      </div>
+      <div class="fg">
+        <label>Телефон</label>
+        <input type="tel" placeholder="+7 (___) ___-__-__"/>
+      </div>
+      <div class="fg">
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          <p>Прикрепить фото — <a href="#">выбрать файл</a></p>
+          <input id="fileInput" type="file" accept="image/*" style="display:none"/>
+        </div>
+      </div>
+      <button class="btn-submit">Получить расчёт за 15 минут</button>
+      <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+    </div>
+  </div>
+</section>
+</div><!-- /hero-scroll -->
+
+<!-- ── СТАТИСТИКА ── -->
+<div class="stats">
+  <div class="stats-track">
+    <!-- оригинал -->
+    <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">ремонтов выполнено</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">лет на рынке</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">довольных клиентов</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">1 день</div><div class="stat-label">средний срок ремонта</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">0 ₽</div><div class="stat-label">выезд по Краснодару</div></div>
+    <div class="stat-sep"></div>
+    <!-- дубль для бесшовного цикла -->
+    <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">ремонтов выполнено</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">лет на рынке</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">довольных клиентов</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">1 день</div><div class="stat-label">средний срок ремонта</div></div>
+    <div class="stat-sep"></div>
+    <div class="stat"><div class="stat-num">0 ₽</div><div class="stat-label">выезд по Краснодару</div></div>
+    <div class="stat-sep"></div>
+  </div>
+</div>
+
+<!-- ── УСЛУГИ ── -->
+<section class="section" id="services">
+  <div class="sec-label"><div class="sec-line"></div><span class="sec-tag">Услуги</span></div>
+  <h2>Что мы устраняем</h2>
+  <p class="sec-sub">Работаем с любыми вмятинами — от мелких парковочных до градобоя на всём кузове</p>
+  <div class="svc-grid">
+    <div class="svc">
+      <span class="svc-num">01</span>
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12c0-2.2 1.8-4 4-4"/></svg>
+      </div>
+      <h3>Вмятины без повреждения лака</h3>
+      <p>Вмятины от парковки, открытых дверей, веток и мелких ударов — устраняем без вскрытия ЛКП. Металл возвращается в исходное состояние.</p>
+      <span class="svc-price">от 1 500 ₽</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">02</span>
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24"><path d="M3 9l4-4 4 4 4-4 4 4M3 15l4-4 4 4 4-4 4 4"/></svg>
+      </div>
+      <h3>Повреждения от града</h3>
+      <p>Множественные вмятины по всему кузову после градобоя — восстанавливаем капот, крышу и двери за 1–2 дня.</p>
+      <span class="svc-price">от 15 000 ₽</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">03</span>
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <h3>Сложные и глубокие вмятины</h3>
+      <p>Крупные вмятины с перегибом металла — работаем там, где другие рекомендуют кузовной ремонт и замену детали.</p>
+      <span class="svc-price">от 3 000 ₽</span>
+    </div>
+    <div class="svc">
+      <span class="svc-num">04</span>
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <h3>Выезд к клиенту</h3>
+      <p>Приедем на удобное место в Краснодаре — домой, на работу или любую парковку. Оборудование берём с собой.</p>
+      <span class="svc-price">бесплатно</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── ТЕХНОЛОГИЯ ── -->
+<section class="section tech-bg" id="technology">
+  <div class="sec-label"><div class="sec-line"></div><span class="sec-tag">Технология</span></div>
+  <h2>Как мы работаем</h2>
+  <p class="sec-sub">Метод PDR — точечное воздействие специальными инструментами изнутри кузова без разбора и покраски</p>
+  <div class="tech-grid">
+    <div class="steps">
+      <div class="step active">
+        <div class="step-num">1</div>
+        <div class="step-connector"></div>
+        <div>
+          <h4>Диагностика</h4>
+          <p>Осматриваем повреждение с LED-рефлектором. Определяем тип вмятины и метод работы. Называем точную цену до начала ремонта — никаких сюрпризов.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-connector"></div>
+        <div>
+          <h4>Подготовка</h4>
+          <p>Получаем доступ к обратной стороне панели через технологические отверстия — без снятия обивки и разбора кузова.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-connector"></div>
+        <div>
+          <h4>Восстановление</h4>
+          <p>Специальными крючками и толкателями постепенно выравниваем металл. Контролируем каждый миллиметр через рефлектор.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Контроль и гарантия</h4>
+          <p>Проверяем результат под разными углами освещения. Подписываем гарантийный лист на выполненную работу.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tech-photo">
+      <!-- Слайд 1: Диагностика -->
+      <div class="tech-slide active" data-slide="1">
+        <img src="step-diag.jpg" alt="Диагностика">
+      </div>
+      <!-- Слайд 2: Подготовка -->
+      <div class="tech-slide" data-slide="2">
+        <img src="step-prep.jpg" alt="Подготовка">
+      </div>
+      <!-- Слайд 3: Восстановление -->
+      <div class="tech-slide" data-slide="3">
+        <img src="step-repair.jpg" alt="Восстановление">
+      </div>
+      <!-- Слайд 4: Контроль -->
+      <div class="tech-slide" data-slide="4">
+        <img src="step-control.jpg" alt="Контроль и гарантия">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ГАЛЕРЕЯ ── -->
+<section class="section" id="gallery">
+  <div class="sec-label"><div class="sec-line"></div><span class="sec-tag">Галерея</span></div>
+  <h2>Наши работы</h2>
+  <p class="sec-sub">Результаты до и после — реальные автомобили наших клиентов, без фильтров</p>
+  <div class="card-stack-wrap">
+    <div class="card-stage" id="cardStage"></div>
+    <div class="card-dots" id="cardDots"></div>
+  </div>
+</section>
+
+<!-- ── ОТЗЫВЫ ── -->
+<section class="section rev-bg" id="reviews">
+  <div class="sec-label"><div class="sec-line"></div><span class="sec-tag">Отзывы</span></div>
+  <h2>Что говорят клиенты</h2>
+  <div class="rev-grid">
+    <div class="rev">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Попал в градобой, машина вся в мелких вмятинах. Думал придётся менять капот и крышу. Оказалось, всё восстановили за один день. Заводской вид, ни следа!</p>
+      <div class="rev-author">
+        <div class="avatar">АК</div>
+        <div><div class="author-name">Алексей К.</div><div class="author-car">BMW 5 Series</div></div>
+      </div>
+    </div>
+    <div class="rev">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Сосед открыл дверь и оставил хорошую вмятину на крыле. Приехали, посмотрели, сделали прямо на парковке за 40 минут. Рекомендую!</p>
+      <div class="rev-author">
+        <div class="avatar">МС</div>
+        <div><div class="author-name">Михаил С.</div><div class="author-car">Toyota Camry</div></div>
+      </div>
+    </div>
+    <div class="rev">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Обратилась после парковочного инцидента. Ребята профессионалы — объяснили всё, показали результат до начала работы. Очень довольна, лак целый!</p>
+      <div class="rev-author">
+        <div class="avatar">НП</div>
+        <div><div class="author-name">Наталья П.</div><div class="author-car">Kia Sportage</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── КОНТАКТЫ + ФОРМА ── -->
+<section class="cta-section" id="contacts">
+  <div class="cta-left">
+    <div class="sec-label" style="margin-bottom:16px"><div class="sec-line"></div><span class="sec-tag">Контакты</span></div>
+    <h2>Готовы восстановить ваш автомобиль?</h2>
+    <p>Отправьте фото повреждения — оценим стоимость за 15 минут и согласуем удобное время. Выезд по Краснодару бесплатно.</p>
+    <div class="contact-cards">
+      <a href="tel:+78610000000" class="contact-card">
+        <div class="cc-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+        <div><div class="cc-val">+7 861 000-00-00</div><div class="cc-sub">Пн–Вс 8:00–21:00</div></div>
+      </a>
+      <a href="https://wa.me/78610000000" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-ico"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.857L.057 23.882l6.168-1.618A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.77-.5-5.364-1.373l-.385-.22-3.663.961.977-3.565-.245-.378A9.937 9.937 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg></div>
+        <div><div class="cc-val">WhatsApp</div><div class="cc-sub">Ответ за 5 минут</div></div>
+      </a>
+    </div>
+  </div>
+  <div class="form-card" style="background:var(--s1)">
+    <h2>Получить расчёт</h2>
+    <p class="form-sub">Ответим в течение 15 минут</p>
+    <div class="fg"><label>Ваше имя</label><input type="text" placeholder="Александр"/></div>
+    <div class="fg"><label>Телефон</label><input type="tel" placeholder="+7 (___) ___-__-__"/></div>
+    <div class="fg">
+      <div class="upload-zone" onclick="document.getElementById('fileInput2').click()">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <p>Прикрепить фото — <a href="#">выбрать файл</a></p>
+        <input id="fileInput2" type="file" accept="image/*" style="display:none"/>
+      </div>
+    </div>
+    <button class="btn-submit">Получить расчёт за 15 минут</button>
+    <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a></p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">PDR<span>Master</span> · Краснодар</div>
+  <div class="footer-links">
+    <a href="#services">Услуги</a>
+    <a href="#technology">Технология</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contacts">Контакты</a>
+  </div>
+  <div class="footer-copy">© 2025 PDRMaster. Все права защищены</div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/78610000000" target="_blank" class="wa-float" aria-label="Написать в WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.857L.057 23.882l6.168-1.618A11.935 11.935 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.77-.5-5.364-1.373l-.385-.22-3.663.961.977-3.565-.245-.378A9.937 9.937 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<script>
+(function(){
+  var SCROLL_H = window.innerWidth <= 768 ? 500 : 1200;
+  var photo = document.querySelector('.hero-photo');
+  if(!photo) return;
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  function onScroll(){
+    var sy = window.scrollY;
+    var t = Math.min(Math.max(sy / SCROLL_H, 0), 1);
+    // ease out cubic
+    var e = 1 - Math.pow(1 - t, 3);
+
+    var clipS = lerp(25, 0, e);
+    var clipE = lerp(75, 100, e);
+    var bgSz  = lerp(170, 100, e);
+
+    photo.style.clipPath =
+      'polygon(' + clipS + '% ' + clipS + '%, ' +
+                   clipE + '% ' + clipS + '%, ' +
+                   clipE + '% ' + clipE + '%, ' +
+                   clipS + '% ' + clipE + '%)';
+    photo.style.backgroundSize = bgSz + '%';
+  }
+
+  window.addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
+})();
+
+// ── GALLERY CARD STACK ──
+(function(){
+  var ITEMS = [
+    {id:1, title:'Вмятина на двери',       img:'door-do.jpg',  imgAfter:'door-posle.jpg'},
+    {id:2, title:'Повреждения от града',    img:'grad2-do.jpg', imgAfter:'grad2-posle.jpg'},
+    {id:3, title:'Вмятина на крыле',        img:'wing-do.jpg',  imgAfter:'wing-posle.jpg'},
+    {id:4, title:'Сложная вмятина',         img:'hard-do.jpg',  imgAfter:'hard-posle.jpg'},
+    {id:6, title:'Крыша автомобиля',        img:'grad-do.jpg',  imgAfter:'grad-posle.jpg'},
+  ];
+
+  function getCardSize(){
+    var vw = window.innerWidth;
+    if(vw <= 480) return {w: Math.round(vw * 0.78), h: Math.round(vw * 0.78 * 0.62), vis:1, step:22};
+    if(vw <= 768) return {w: Math.round(vw * 0.65), h: Math.round(vw * 0.65 * 0.62), vis:1, step:20};
+    return {w:520, h:320, vis:2, step:16};
+  }
+  var sz = getCardSize();
+  var CARD_W   = sz.w, CARD_H = sz.h;
+  var SPACING  = Math.round(CARD_W * 0.52);
+  var STEP_DEG = sz.step;
+  var MAX_VIS  = sz.vis;
+  var LIFT     = 22;
+  var SC_ACT   = 1.03, SC_IN = 0.94;
+  var TILT_X   = 12;
+
+  var stage    = document.getElementById('cardStage');
+  var dotsWrap = document.getElementById('cardDots');
+  if(!stage) return;
+
+  var len = ITEMS.length, active = 0;
+  var cards = [], dots = [];
+  var autoTimer;
+
+  function wrapIdx(n){ return ((n % len) + len) % len; }
+
+  function signedOff(i, act){
+    var raw = i - act;
+    var alt = raw > 0 ? raw - len : raw + len;
+    return Math.abs(alt) < Math.abs(raw) ? alt : raw;
+  }
+
+  // ── Build cards
+  ITEMS.forEach(function(item, i){
+    var card = document.createElement('div');
+    card.className = 'g-card';
+    card.style.width  = CARD_W + 'px';
+    card.style.height = CARD_H + 'px';
+
+    var phBefore = item.img
+      ? '<img class="g-img-before" src="'+item.img+'" alt="До">'
+      : '<div class="g-ph"><svg viewBox="0 0 120 70"><path d="M10 45C10 45 20 20 40 18L70 16C85 16 95 22 105 35L110 45C110 45 110 52 100 52L20 52C10 52 10 45 10 45Z" stroke-width="1.5"/><circle cx="30" cy="52" r="8"/><circle cx="90" cy="52" r="8"/></svg></div>';
+    var phAfter = item.imgAfter
+      ? '<img class="g-img-after" src="'+item.imgAfter+'" alt="После">'
+      : '';
+
+    card.innerHTML =
+      '<div class="g-card-bg">' + phBefore + phAfter + '</div>' +
+      '<div class="g-card-overlay"></div>' +
+      '<div class="g-card-badges"><span class="g-badge-b">До</span><span class="g-badge-a">После</span></div>' +
+      '<div class="g-card-footer"><span class="g-card-title">'+item.title+'</span><span class="g-card-sub">до / после</span></div>';
+
+    card.addEventListener('click', (function(idx){ return function(){
+      if(idx !== active) setActive(idx);
+    }; })(i));
+
+    stage.appendChild(card);
+    cards.push(card);
+
+    // dot
+    var dot = document.createElement('button');
+    dot.className = 'card-dot';
+    dot.setAttribute('aria-label', item.title);
+    dot.addEventListener('click', (function(idx){ return function(){ setActive(idx); }; })(i));
+    dotsWrap.appendChild(dot);
+    dots.push(dot);
+  });
+
+  // ── Render positions
+  function update(){
+    cards.forEach(function(card, i){
+      var off = signedOff(i, active);
+      var abs = Math.abs(off);
+      if(abs > MAX_VIS){
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        card.style.zIndex = '0';
+        return;
+      }
+      var isAct = off === 0;
+      var x     = off * SPACING;
+      var y     = isAct ? -LIFT : abs * 10;
+      var rotZ  = off * STEP_DEG;
+      var rotX  = isAct ? 0 : TILT_X;
+      var sc    = isAct ? SC_ACT : SC_IN;
+
+      card.style.opacity       = '' + (1 - abs * 0.12);
+      card.style.pointerEvents = 'auto';
+      card.style.zIndex        = '' + (100 - abs);
+      card.style.transform     =
+        'translateX('+x+'px) translateY('+y+'px) ' +
+        'rotateZ('+rotZ+'deg) rotateX('+rotX+'deg) ' +
+        'scale('+sc+')';
+      card.classList.toggle('is-active', isAct);
+    });
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===active); });
+  }
+
+  function setActive(idx){
+    active = wrapIdx(idx);
+    update();
+  }
+
+  // ── Before/After touch (только tap на активной карточке, не свайп)
+  var tapStartX = 0, tapStartY = 0, isTap = false;
+  stage.addEventListener('touchstart', function(e){
+    tapStartX = e.touches[0].clientX;
+    tapStartY = e.touches[0].clientY;
+    isTap = true;
+  }, {passive:true});
+  stage.addEventListener('touchmove', function(e){
+    // если сдвинулся больше 10px — это свайп, не тап
+    if(Math.abs(e.touches[0].clientX - tapStartX) > 10 ||
+       Math.abs(e.touches[0].clientY - tapStartY) > 10) isTap = false;
+  }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if(isTap){
+      var card = e.target.closest('.g-card.is-active');
+      if(card && card.querySelector('.g-img-after')){
+        card.classList.toggle('touch-after');
+        return;
+      }
+    }
+    cards.forEach(function(c){ c.classList.remove('touch-after'); });
+  }, {passive:true});
+
+  // ── Drag (desktop)
+  var dragStartX = 0, didDrag = false;
+  stage.addEventListener('mousedown', function(e){
+    var card = e.target.closest('.g-card');
+    if(!card || !card.classList.contains('is-active')) return;
+    dragStartX = e.clientX; didDrag = false;
+    function onMove(e){ if(Math.abs(e.clientX - dragStartX) > 6) didDrag = true; }
+    function onUp(e){
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      if(!didDrag) return;
+      var dx = e.clientX - dragStartX;
+      if(dx >  80) setActive(active - 1);
+      else if(dx < -80) setActive(active + 1);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup',   onUp);
+  });
+
+  // ── Swipe (mobile)
+  var touchX0 = 0;
+  stage.addEventListener('touchstart', function(e){ touchX0 = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchend',   function(e){
+    var dx = e.changedTouches[0].clientX - touchX0;
+    if(dx >  60) setActive(active - 1);
+    else if(dx < -60) setActive(active + 1);
+  }, {passive:true});
+
+  // ── Auto-advance (pause on hover)
+  function startAuto(){ autoTimer = setInterval(function(){ setActive(active + 1); }, 3200); }
+  function stopAuto(){ clearInterval(autoTimer); }
+  stage.addEventListener('mouseenter', stopAuto);
+  stage.addEventListener('mouseleave', startAuto);
+  startAuto();
+
+  update();
+})();
+
+// ── REVIEWS TOUCH ──
+(function(){
+  var grid = document.querySelector('.rev-grid');
+  if(!grid) return;
+  var revs = grid.querySelectorAll('.rev');
+  function clear(){ revs.forEach(function(r){ r.classList.remove('touch-active'); }); }
+  grid.addEventListener('touchmove', function(e){
+    var t = e.touches[0];
+    var el = document.elementFromPoint(t.clientX, t.clientY);
+    if(!el) return;
+    var rev = el.closest('.rev');
+    clear();
+    if(rev) rev.classList.add('touch-active');
+  }, {passive:true});
+  grid.addEventListener('touchend', clear, {passive:true});
+})();
+
+// ── GALLERY TOUCH ──
+(function(){
+  var galleryGrid = document.querySelector('.gallery-grid');
+  if(!galleryGrid) return;
+  var items = galleryGrid.querySelectorAll('.g-item');
+
+  function clearActive(){ items.forEach(function(i){ i.classList.remove('touch-active'); }); }
+
+  galleryGrid.addEventListener('touchmove', function(e){
+    var touch = e.touches[0];
+    var el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if(!el) return;
+    var item = el.closest('.g-item');
+    clearActive();
+    if(item) item.classList.add('touch-active');
+  }, {passive: true});
+
+  galleryGrid.addEventListener('touchend', function(){ clearActive(); }, {passive: true});
+})();
+
+// ── SERVICE CARDS TOUCH ──
+(function(){
+  var svcs = document.querySelectorAll('.svc');
+  if(!svcs.length) return;
+  var grid = document.querySelector('.svc-grid');
+
+  function clearActive(){ svcs.forEach(function(s){ s.classList.remove('touch-active'); }); }
+
+  grid.addEventListener('touchmove', function(e){
+    var touch = e.touches[0];
+    var el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if(!el) return;
+    var svc = el.closest('.svc');
+    clearActive();
+    if(svc) svc.classList.add('touch-active');
+  }, {passive: true});
+
+  grid.addEventListener('touchend', function(){ clearActive(); }, {passive: true});
+})();
+
+// ── STEPS HOVER + TOUCH ──
+(function(){
+  var steps = document.querySelectorAll('.step');
+  var slides = document.querySelectorAll('.tech-slide');
+  if(!steps.length) return;
+
+  function activate(el){
+    steps.forEach(function(s){ s.classList.remove('active'); });
+    if(!el) return;
+    el.classList.add('active');
+    // переключаем слайд
+    var idx = Array.prototype.indexOf.call(steps, el) + 1;
+    slides.forEach(function(sl){
+      sl.classList.toggle('active', parseInt(sl.dataset.slide) === idx);
+    });
+  }
+
+  // Desktop: hover
+  steps.forEach(function(step){
+    step.addEventListener('mouseenter', function(){ activate(step); });
+  });
+
+  // Mobile: определяем шаг под пальцем при touchmove
+  document.querySelector('.steps').addEventListener('touchmove', function(e){
+    var touch = e.touches[0];
+    var el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if(!el) return;
+    var step = el.closest('.step');
+    if(step) activate(step);
+  }, {passive: true});
+})();
+</script>
+</body>
+</html>
