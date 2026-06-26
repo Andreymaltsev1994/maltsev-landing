@@ -40,7 +40,7 @@ img{max-width:100%;display:block}
 .btn-nav:hover{border-color:rgba(240,242,245,.5)}
 
 /* ── HERO SCROLL WRAPPER ── */
-#hero-scroll{position:relative;height:calc(1200px + 100vh)}
+#hero-scroll{position:relative;height:calc(600px + 100vh)}
 .hero-sticky{
   position:sticky;top:0;height:100vh;overflow:hidden;
   display:grid;grid-template-columns:1fr 440px;
@@ -620,7 +620,7 @@ footer{background:var(--s1);border-top:1px solid var(--br);padding:36px 60px;dis
 
 <script>
 (function(){
-  var SCROLL_H = window.innerWidth <= 768 ? 500 : 1200;
+  var SCROLL_H = window.innerWidth <= 768 ? 300 : 600;
   var photo = document.querySelector('.hero-photo');
   if(!photo) return;
 
