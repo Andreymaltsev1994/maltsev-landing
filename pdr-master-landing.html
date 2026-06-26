@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100%}
 :root{
   --acc:#FF7A00;--bg:#0C0D0F;--s1:#13161B;--s2:#1A1D24;
   --br:#222730;--tx:#F0F2F5;--mu:#7B8494;
@@ -152,12 +153,12 @@ h1 em{display:block;font-style:italic;color:var(--acc)}
 .tech-slide-label span{color:var(--acc);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:4px}
 
 /* GALLERY CARD STACK */
-.card-stack-wrap{user-select:none;-webkit-user-select:none}
+.card-stack-wrap{user-select:none;-webkit-user-select:none;overflow:hidden;width:100%}
 .card-stage{
   position:relative;height:460px;
   display:flex;align-items:flex-end;justify-content:center;
-  perspective:1100px;overflow:visible;
-  touch-action:pan-y pinch-zoom;
+  perspective:1100px;overflow:hidden;
+  touch-action:pan-y;
 }
 .g-card{
   position:absolute;bottom:0;
@@ -759,29 +760,6 @@ footer{background:var(--s1);border-top:1px solid var(--br);padding:36px 60px;dis
     update();
   }
 
-  // ── Before/After touch (только tap на активной карточке, не свайп)
-  var tapStartX = 0, tapStartY = 0, isTap = false;
-  stage.addEventListener('touchstart', function(e){
-    tapStartX = e.touches[0].clientX;
-    tapStartY = e.touches[0].clientY;
-    isTap = true;
-  }, {passive:true});
-  stage.addEventListener('touchmove', function(e){
-    // если сдвинулся больше 10px — это свайп, не тап
-    if(Math.abs(e.touches[0].clientX - tapStartX) > 10 ||
-       Math.abs(e.touches[0].clientY - tapStartY) > 10) isTap = false;
-  }, {passive:true});
-  stage.addEventListener('touchend', function(e){
-    if(isTap){
-      var card = e.target.closest('.g-card.is-active');
-      if(card && card.querySelector('.g-img-after')){
-        card.classList.toggle('touch-after');
-        return;
-      }
-    }
-    cards.forEach(function(c){ c.classList.remove('touch-after'); });
-  }, {passive:true});
-
   // ── Drag (desktop)
   var dragStartX = 0, didDrag = false;
   stage.addEventListener('mousedown', function(e){
@@ -798,16 +776,37 @@ footer{background:var(--s1);border-top:1px solid var(--br);padding:36px 60px;dis
       else if(dx < -80) setActive(active + 1);
     }
     document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup',   onUp);
+    document.addEventListener('mouseup', onUp);
   });
 
-  // ── Swipe (mobile)
-  var touchX0 = 0;
-  stage.addEventListener('touchstart', function(e){ touchX0 = e.touches[0].clientX; }, {passive:true});
-  stage.addEventListener('touchend',   function(e){
-    var dx = e.changedTouches[0].clientX - touchX0;
-    if(dx >  60) setActive(active - 1);
-    else if(dx < -60) setActive(active + 1);
+  // ── Touch (mobile): тап = ДО/ПОСЛЕ, свайп = смена карточки
+  var tx0 = 0, ty0 = 0, tMoved = false;
+  stage.addEventListener('touchstart', function(e){
+    tx0 = e.touches[0].clientX;
+    ty0 = e.touches[0].clientY;
+    tMoved = false;
+  }, {passive:true});
+  stage.addEventListener('touchmove', function(e){
+    if(Math.abs(e.touches[0].clientX - tx0) > 8 ||
+       Math.abs(e.touches[0].clientY - ty0) > 8) tMoved = true;
+  }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx0;
+    var dy = e.changedTouches[0].clientY - ty0;
+    if(!tMoved){
+      // ТАП — переключить ДО/ПОСЛЕ на активной карточке
+      var card = e.target.closest('.g-card.is-active');
+      if(card && card.querySelector('.g-img-after')){
+        card.classList.toggle('touch-after');
+      }
+      return;
+    }
+    // СВАЙП — менять карточку только если горизонталь > вертикаль
+    if(Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40){
+      cards.forEach(function(c){ c.classList.remove('touch-after'); });
+      if(dx > 0) setActive(active - 1);
+      else setActive(active + 1);
+    }
   }, {passive:true});
 
   // ── Auto-advance (pause on hover)
